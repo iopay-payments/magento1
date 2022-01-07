@@ -1,0 +1,10 @@
+<p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
+<p><?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?></p>
+<p><?php echo $this->__('Customer (IoPay): %s', $this->getInfo()->getIopayCustomer()); ?></p>
+<p><?php echo $this->__('Copia e Cola: %s', $this->getInfo()->getIopayPixQrcode()); ?></p>
+
+<?php if ($this->getInfo()->getIopayPixQrcodeUrl()) : ?>
+    <p>
+        <img id='qrcode' class="iopay-img-qr" src="<?php echo $this->getInfo()->getIopayPixQrcodeUrl(); ?>" title="IoPay Pix" width="200" height="200" />
+    </p>
+<?php endif; ?>

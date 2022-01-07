@@ -1,0 +1,28 @@
+<?php
+$helper             = Mage::helper('iopay_gateway');
+$expiration_date    = $helper->convertDateHour($this->getInfo()->getIopayExpirationDate());
+?>
+
+<p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
+
+<?php if ($this->getInfo()->getIopayPaymentId()) : ?>
+    <p>
+        <?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?>
+    </p>
+<?php endif; ?>
+
+<?php if ($this->getInfo()->getIopayExpirationDate()) : ?>
+    <p>
+        <?php echo $this->__('Pagar até: %s', $expiration_date); ?>
+    </p>
+<?php endif; ?>
+
+<?php if ($this->getInfo()->getIopayPixQrcode()) : ?>
+    <p><?php echo $this->__('Copia e Cola: %s', $this->getInfo()->getIopayPixQrcode()); ?></p>
+<?php endif; ?>
+
+<?php if ($this->getInfo()->getIopayPixQrcodeUrl()) : ?>
+    <p>
+        <img id='qrcode' class="iopay-img-qr" src="<?php echo $this->getInfo()->getIopayPixQrcodeUrl(); ?>" title="IoPay Pix" width="200" height="200" />
+    </p>
+<?php endif; ?>

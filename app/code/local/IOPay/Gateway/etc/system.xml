@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <iopay_gateway translate="label" module="iopay_gateway">
+                    <label>IOPay - Preferências</label>
+                    <sort_order>999</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[<a href="https://iopay.com.br/" target="_blank"><img title="iopay" alt="iopay" id="logo_iopay_settings" height="40" style="margin-bottom: 10px; margin-top: 20px;" /></a><br />
+                    <p>Preencha os campos abaixo com os dados de sua conta.</p>
+                    <hr style="margin-bottom: 10px" />
+                    <script type="text/javascript">
+                    document.getElementById('logo_iopay_settings').src = 'https://iopay.com.br/assets/img/logo/iopay-dark.png';
+                    </script>
+                    ]]></comment>
+                    <fields>
+                        <environment translate="label">
+                            <label>Ambiente</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>iopay_gateway/source_environment</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </environment>
+                        <log translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Habilite para visualizar as saídas no console do sistema (útil para desenvolvedores)]]>
+                            </comment>
+                        </log>
+                        <taxvat_field translate="label">
+                            <label>Campo CPF</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>iopay_gateway/source_taxfield</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>
+                                <![CDATA[
+                                Selecione em qual campo o algoritmo irá buscar as informações de CPF.
+                                <br>
+                                IOPay Taxvat: irá inserir um campo customizado de CPF nas opções de pagamento;
+                                <br>
+                                Billing: irá buscar o CPF do campo vat_id do endereço de cobrança;
+                                <br>
+                                Customer: irá buscar o CPF do campo vat_number no cadastro do cliente
+                                ]]>
+                            </tooltip>
+                        </taxvat_field>
+                        <invoice translate="label">
+                            <label>Gerar Invoice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Habilite para gerar uma fatura automaticamente quando o pagamento for aprovado]]>
+                            </comment>
+                        </invoice>
+                        <logo_checkout translate="label">
+                            <label>Usar logo no Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Habilite mostrar a logo da IoPay nos métodos de pagamento no checkout]]>
+                            </comment>
+                        </logo_checkout>
+                        <email>
+                            <label>IOPay E-mail</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <io_seller_id>
+                            <label>IOPay Seller Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </io_seller_id>
+                        <secret>
+                            <label>IOPay Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </secret>
+                    </fields>
+                </iopay_gateway>
+                <iopay_gateway_creditcard translate="label" module="iopay_gateway">
+                    <label>IOPay - Cartão de Crédito</label>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>1</sort_order>
+                        </title>
+                        <active translate="label">
+                            <label>Habilitado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                        </active>
+                        <order_status translate="label">
+                            <label>Status do Pedido</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <payment_action translate="label">
+                            <label>Ação de Pagamento</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>iopay_gateway/source_paymentaction</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_action>
+                        <antifraud_plan translate="label">
+                            <label>Plano Antifraude</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>iopay_gateway/source_antifraud</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[consulte sua conta IoPay para saber qual dos planos antifraude você
+irá utilizar]]>
+                            </comment>
+                            <tooltip>
+                                <![CDATA[
+                                with_anti_fraud: Recurso antifraude padrão baseado em inteligência artificial e redes neurais para análise de transações e comportamentos de navegação [Em parceria com Konduto - https://konduto.com.br]
+                                <br>
+                                with_anti_fraud_insurance: Recurso antifraude com seguro contra fraudes. Esse plano é indicado para negócios online que sofrem com fraudes e chargebacks numa proporção igual o superior à 1.8% em relação à movimentação das vendas totais. Esse recurso é fornecido em aliança com a ClearSale (https://clearsale.com.br)
+                                <br>
+                                without_antifraud: Plano sem recurso antifraude. Essa opção é indicada apenas a negócios e segmentos que possuem índices de fraudes muito baixos ou praticamente zerados.
+                                ]]>
+                            </tooltip>
+                        </antifraud_plan>
+                        <antifraud_key translate="label">
+                            <label>Antifraude Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </antifraud_key>
+                        <installments translate="label">
+                            <label>Parcelamento</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>iopay_gateway/source_installments</source_model>
+                            <sort_order>34</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </installments>
+                        <allowspecific translate="label">
+                            <label>Países permitidos</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>35</sort_order>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Pagamento em países específicos</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </specificcountry>
+                    </fields>
+                </iopay_gateway_creditcard>
+                <iopay_gateway_pix translate="label" module="iopay_gateway">
+                    <label>IOPay - Pix</label>
+                    <sort_order>1001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>1</sort_order>
+                        </title>
+                        <active translate="label">
+                            <label>Habilitado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                        </active>
+                        <order_status translate="label">
+                            <label>Status do Pedido</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <instructions translate="label">
+                            <label>Instruções</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>A instrução aparecerá quando o usuário selecionar o método de pagamento no checkout. Para remover a mensagem basta deixar esse campo em branco.</tooltip>
+                        </instructions>
+                        <allowspecific translate="label">
+                            <label>Países permitidos</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>35</sort_order>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Pagamento em países específicos</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </specificcountry>
+                    </fields>
+                </iopay_gateway_pix>
+                <iopay_gateway_boleto translate="label" module="iopay_gateway">
+                    <label>IOPay - Boleto</label>
+                    <sort_order>1002</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>1</sort_order>
+                        </title>
+                        <active translate="label">
+                            <label>Habilitado</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>5</sort_order>
+                        </active>
+                        <order_status translate="label">
+                            <label>Status do Pedido</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <instructions translate="label">
+                            <label>Instruções</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>A instrução aparecerá quando o usuário selecionar o método de pagamento no checkout. Para remover a mensagem basta deixar esse campo em branco.</tooltip>
+                        </instructions>
+                        <allowspecific translate="label">
+                            <label>Países permitidos</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>35</sort_order>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Pagamento em países específicos</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </specificcountry>
+                    </fields>
+                </iopay_gateway_boleto>
+            </groups>
+        </payment>
+    </sections>
+</config>

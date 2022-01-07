@@ -1,0 +1,188 @@
+<?php
+$_code      = $this->getMethodCode() ;
+$cardToken  = Mage::helper('iopay_gateway/authentication')->getCardToken();
+
+$api = Mage::helper('iopay_gateway/api');
+$api->setUri("/v1/card/tokenize/token");
+
+$urlTokenize = $api->getCompleteUrl();
+?>
+<script type="text/javascript">
+    jQuery( document ).ready(function($) {
+        $("#<?php echo $_code ?>_cc_number").creditCardType();
+    });
+</script>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <input type="hidden" id="token" name="payment[token]" />
+    <li>
+        <label for="<?php echo $_code ?>_cc_owner" class="required"><em>*</em><?php echo $this->__('Nome no Cartão') ?></label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Nome no Cartão') ?>" class="input-text required-entry" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner]" value="<?php echo $this->escapeHtml($this->getInfoData('cc_owner')) ?>" />
+        </div>
+    </li>
+
+    <li>
+        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Número do Cartão') ?></label>
+        <div class="input-box">
+            <input type="text" pattern="\d*" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Credit Card Number')) ?>" class="input-text validate-cc-number validate-cc-type" value="" />
+        </div>
+    </li>
+
+    <ul id="credit-card-type">
+        <li class="VI" style="display:none;"></li>
+        <li class="MC" style="display:none;"></li>
+        <li class="AE" style="display:none;"></li>
+        <li class="DI" style="display:none;"></li>
+        <li class="SM" style="display:none;"></li>
+        <li class="SO" style="display:none;"></li>
+    </ul>
+    <input class="cc_type" id="<?php echo $_code ?>_cc_type" type="hidden" name="payment[cc_type]" value="" />
+
+    <?php if(Mage::helper('iopay_gateway')->getTaxfield() == 'iopay'): ?>
+        <li>
+        <label for="<?php echo $_code ?>_cc_cpf" class="required"><em>*</em><?php echo $this->__('CPF do Titular') ?></label>
+        <div class="input-box">
+            <input type="text" pattern="\d*" id="<?php echo $_code ?>_cc_cpf" name="payment[cc_cpf]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('CPF do Titular')) ?>" class="input-text required-entry" value="" />
+        </div>
+    </li>
+    <?php endif; ?>
+
+    <li id="<?php echo $_code ?>_cc_type_exp_div">
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Data de Expiração') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month]" class="month validate-cc-exp required-entry">
+                    <?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
+                    <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="v-fix">
+                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year]" class="year required-entry">
+                    <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                        <?php $k = substr($k, 2, 3); ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </li>
+    <li id="<?php echo $_code ?>_cc_type_cvv_div">
+        <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Código de Verificação') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <input type="text" pattern="\d*" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Código de Verificação')) ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
+            </div>
+            <a href="#" class="cvv-what-is-this"><?php echo $this->__('O que é isso?') ?></a>
+        </div>
+    </li>
+    <li>
+        <label for="<?php echo $_code ?>_cc_installment" class="required"><em>*</em><?php echo $this->__('Parcelamento') ?></label>
+        <div class="input-box">
+            <?php $_ccInstallment = $this->getInfoData('cc_installment') ?>
+            <select id="iopay_installment" name="payment[cc_installment]" class="required-entry">
+                <?php foreach ($this->getCcInstallments() as $k=>$v): ?>
+                    <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccInstallment): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </li>
+</ul>
+
+<script type="text/javascript">
+    function addListenerEvent(el, eventName, handler){
+        if (el.addEventListener) {
+            el.addEventListener(eventName, handler);
+        } else {
+            el.attachEvent('on' + eventName, function(){
+                handler.call(el);
+            });
+        }
+    };
+
+    //Change installments option, call tokenize
+    Event.observe($('iopay_installment'), 'change', function() {
+        if (this.selectedIndex) {
+            tokenize();
+        }
+    });
+
+    //Listner when change data fields
+    addListenerEvent(document.querySelector('input[name="payment[cc_owner]"]'), 'blur', tokenize);
+    addListenerEvent(document.querySelector('input[name="payment[cc_number]"]'), 'blur', tokenize);
+    addListenerEvent(document.querySelector('input[name="payment[cc_cid]"]'), 'blur', tokenize);
+
+    //Function to tokenize credit card by frontend
+    function tokenize() {
+        var holder_name         = document.getElementById('<?php echo $_code ?>_cc_owner').value;
+        var card_number         = document.getElementById('<?php echo $_code ?>_cc_number').value;
+        var security_code       = document.getElementById('<?php echo $_code ?>_cc_cid').value;
+        var expiration_year     = document.getElementById('<?php echo $_code ?>_expiration_yr').value;
+        var expiration_month    = document.getElementById('<?php echo $_code ?>_expiration').value;
+
+        if (!isEmpty(holder_name) &&
+            !isEmpty(card_number) &&
+            !isEmpty(security_code) &&
+            !isEmpty(expiration_year) &&
+            !isEmpty(expiration_month) &&
+            card_number.length == 19
+        ) {
+            var _data = {
+                "holder_name": holder_name,
+                "card_number": card_number.replace(/\D/g,''),
+                "security_code": security_code,
+                "expiration_year": expiration_year,
+                "expiration_month": expiration_month
+            }
+
+            var settings = {
+                "url": "<?php echo $urlTokenize; ?>",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer <?php echo $cardToken; ?>"
+                },
+                "data": _data,
+            };
+
+            jQuery.ajax(
+                settings
+            ).done(function (response) {
+                var id = response['id'];
+                console.log(response);
+                console.log(id);
+                console.log(response.id);
+                if (id != null || id != '') {
+                    document.querySelector("#token").value = id;
+                } else {
+                    if (response.error) {
+                        console.log(response.error);
+                        alert(response.error.message);
+                    }
+                    alert('Não foi possível criptografar os dados do cartão de crédito!');
+                }
+            }).fail(function(data, textStatus, xhr) {
+                console.log("code status", data.status);
+                if (data.status == 402) {
+                    console.log(data.responseJSON.error)
+                    var errorMessage = data.responseJSON.error['message'];
+                    alert(errorMessage);
+                } else if (data.status == 401) {
+                    console.log(data.responseJSON.error)
+                    var errorMessage = data.responseJSON.error['message'];
+                    alert(errorMessage);
+                }
+            });
+        }
+    }
+
+    function isEmpty(strValue)
+    {
+        if (!strValue || strValue.trim() === "" || (strValue.trim()).length === 0) {
+            return true;
+        }
+        return false;
+    }
+</script>

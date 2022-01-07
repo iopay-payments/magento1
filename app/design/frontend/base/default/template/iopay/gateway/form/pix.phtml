@@ -1,0 +1,18 @@
+<div class="form-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <?php if(Mage::helper('iopay_gateway')->getTaxfield() == 'iopay'): ?>
+    <li>
+        <label class="required" for="payment_form_<?php echo $this->getMethodCode() ?>"><em>*</em><?php echo $this->__('Informe seu CPF') ?></label>
+        <div class="input-box">
+            <input type="text" id="iopay_pix_cpf" name="payment[iopay_pix_cpf]" title="<?php echo $this->__('CPF') ?>" class="input-text required-entry" value="<?php echo $this->htmlEscape($this->getInfoData('cpf')) ?>" maxlength="16"/>
+        </div>
+    </li>
+    <?php endif; ?>
+    <?php if ($instructions = Mage::helper('iopay_gateway')->getIopayPixInstructions()): ?>
+        <li>
+            <div class="<?php echo $this->getMethodCode() ?>-instructions-content agreement-content alert alert-info">
+                <?php echo nl2br($instructions) ?>
+                <br>
+            </div>
+        </li>
+    <?php endif; ?>
+</div>

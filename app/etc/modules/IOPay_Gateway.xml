@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <IOPay_Gateway>
+            <active>true</active>
+            <codePool>local</codePool>
+        </IOPay_Gateway>
+    </modules>
+</config>

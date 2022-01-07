@@ -1,0 +1,82 @@
+<?php
+$order              = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+$helper             = Mage::helper('iopay_gateway');
+$_payment           = $order->getPayment();
+$_method            = $_payment->getData('method');
+$_boletoUrl         = $_payment->getData('iopay_boleto_url');
+$_barcode           = $_payment->getData('iopay_boleto_barcode');
+$_pixQrcode         = $_payment->getData('iopay_pix_qrcode');
+$_pixQrcodeUrl      = $_payment->getData('iopay_pix_qrcode_url');
+$_expirationDate    = $helper->convertDate($_payment->getData('iopay_expiration_date'));
+?>
+
+<?php if ($_method == 'iopay_gateway_boleto'): ?>
+<div class="checkout-success">
+    <div class="content-wrapper">
+        <br>
+        <h1><?= $order->getCustomerFirstname() ?>, aguardamos o seu pagamento 😁</h1>
+        <div class="text">Seu boleto foi gerado com sucesso.
+            <br>
+            O seu boleto vence em: <strong><?= $_expirationDate ?></strong>
+        </div>
+        <?php if ($_barcode): ?>
+            <div class="text">Abaixo está o código para o pagamento do seu boleto:</div>
+            <div class="text"><br><strong><?= $_barcode ?></strong></div>
+        <?php endif; ?>
+        <div class="buttons-wrapper">
+            <br>
+            <a class="button primary-button" href="<?= $_boletoUrl ?>" target="_blank"><span>Imprimir boleto</span></a>
+        </div>
+    </div>
+</div>
+<?php elseif($_method == 'iopay_gateway_creditcard'): ?>
+    <div class="checkout-success">
+        <div class="content-wrapper">
+            <h1>Parabéns por sua escolha! 🎉</h1>
+            <div class="text">
+                Alegre-se! Seu pedido está feito e logo mais você tera ele em mãos.
+                Assim que for enviado você receberá um código de rastreio para o acompanhamento.
+                Você também pode consultar o status do pedido em <a href="<?php echo $this->getUrl('sales/order/history/') ?>">Meus Pedidos</a>.</div>
+            <div class="buttons-wrapper">
+                <br>
+                <a class="button primary-button" href="<?php echo $this->getViewOrderUrl() ?>"><span>Acompanhar pedido</span></a>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+<?php $expiration_date = $helper->convertDateHour($_payment->getData('iopay_expiration_date')); ?>
+<div class="checkout-success">
+    <div class="content-wrapper">
+        <div class="iopay-pix">
+            <h1><?= $order->getCustomerFirstname() ?>, só falta pagar 😁</h1>
+            <div class="container" id="container">
+                <div class="box">
+                    <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png" class="iopay-img-pix" width="180" height="64"/>
+                </div>
+                <div class="box">
+                    <img id='barcode' class="iopay-img-qr" src="<?php echo $_pixQrcodeUrl; ?>" title="IoPay Pix" width="200" height="200" />
+                </div>
+                <div class="box">
+                    <span class="title">
+                        <strong>Escaneie o código com o seu celular</strong>
+                    </span>
+                </div>
+                <div class="box">
+                    <span class="subtitles">Pagar até <?= $expiration_date ?></span>
+                </div>
+                <div class="box">
+                    <span class="title"><strong>Consulte o status do pedido em <a href="<?php echo $this->getUrl('sales/order/history/') ?>">Meus Pedidos</a></strong></span>
+                </div>
+                <div class="box">
+                    <span class="subtitles">Abra o app do seu banco no celular, escolha Pix e aponte a câmera para o código</span>
+                </div>
+                <div class="box">
+                    <button class="btn btn-iopay" data-clipboard-text="<?php echo $_pixQrcode; ?>">
+                        Copiar Código
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

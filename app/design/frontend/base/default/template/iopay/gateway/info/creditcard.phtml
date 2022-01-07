@@ -1,0 +1,25 @@
+<?php
+$helper = Mage::helper('iopay_gateway');
+?>
+
+<p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
+
+<?php if ($this->getInfo()->getIopayPaymentId()) : ?>
+    <p>
+        <?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?>
+    </p>
+<?php endif; ?>
+
+<?php if ($this->getInfo()->getAdditionalInformation('cc_number')) : ?>
+    <p>
+        <?php
+            $creditCard     = $this->getInfo()->getAdditionalInformation('cc_number');
+            $cardFormatted  =  substr($creditCard, 0, 4).'********'.substr($creditCard, -4);
+            echo $this->__('Cartão: %s', $cardFormatted);
+        ?>
+    </p>
+<?php endif; ?>
+
+
+
+

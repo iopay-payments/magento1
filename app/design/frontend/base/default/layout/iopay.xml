@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+
+        <!-- all pages on footer -->
+        <reference name="footer">
+            <block type="core/template" name="iopay_antifraud">
+                <action method="setTemplate"><template>iopay/gateway/footer.phtml</template></action>
+            </block>
+        </reference>
+    </default>
+
+    <!-- checkout -->
+    <checkout_onepage_index translate="label">
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/jquery/jquery.mask.latest.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/inputs.js</name></action>
+            <block type="core/text" name="secure.iopay">
+                <action method="setText"><text><![CDATA[<script type="text/javascript" src=""></script>]]></text></action>
+            </block>
+            <block type="core/text" name="security.iopay">
+                <action method="setText"><text><![CDATA[<script src="" view="payment"></script>]]></text></action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/jquery/jquery.mask.latest.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/inputs.js</name></action>
+            <block type="core/text" name="secure.iopay">
+                <action method="setText"><text><![CDATA[<script type="text/javascript" src=""></script>]]></text></action>
+            </block>
+            <block type="core/text" name="security.iopay">
+                <action method="setText"><text><![CDATA[<script src="" view="payment"></script>]]></text></action>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <!-- success -->
+    <checkout_onepage_success>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/iopay.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/clipboard.min.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="checkout/onepage_success" name="checkout.success.iopay" template="iopay/gateway/success.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+    <onepagecheckout_index_success>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/iopay.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/clipboard.min.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="checkout/onepage_success" name="checkout.success.iopay" template="iopay/gateway/success.phtml"/>
+        </reference>
+    </onepagecheckout_index_success>
+</layout>

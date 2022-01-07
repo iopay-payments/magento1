@@ -1,0 +1,16 @@
+<?php
+$helper             = Mage::helper('iopay_gateway');
+$expiration_date    = $helper->convertDate($this->getInfo()->getIopayExpirationDate());
+?>
+
+<p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
+<p><?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?></p>
+<p><?php echo $this->__('Customer (IoPay): %s', $this->getInfo()->getIopayCustomer()); ?></p>
+<p><?php echo $this->__('Barcode: %s', $this->getInfo()->getIopayBoletoBarcode()); ?></p>
+<p><?php echo $this->__('Vencimento: %s', $expiration_date); ?></p>
+
+<?php if ($this->getInfo()->getIopayBoletoUrl()) : ?>
+    <p>
+        <a href="<?php echo $this->getInfo()->getIopayBoletoUrl(); ?>" target="_blank"><?php echo $this->__("Clique aqui para imprimir o boleto"); ?></a>
+    </p>
+<?php endif; ?>
