@@ -1,0 +1,12 @@
+{
+    "name": "iopay-payments/magento1",
+    "description": "Modulo para Magento 1.x - IoPay",
+    "type": "composer-plugin",
+    "authors": [
+        {
+            "name": "IoPay",
+            "email": "suporte@iopay.com.br"
+        }
+    ],
+    "require": {}
+}
