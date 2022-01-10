@@ -1,6 +1,7 @@
 {
     "name": "iopay-payments/magento1",
     "description": "Modulo para Magento 1.x - IoPay",
+    "version": "1.0.3",
     "type": "composer-plugin",
     "authors": [
         {
@@ -8,8 +9,11 @@
             "email": "suporte@iopay.com.br"
         }
     ],
-    "require": {},
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "php": ">=5.4"
+    }
 }
