@@ -21,6 +21,9 @@ Métodos de pagamento disponíveis:
 - Moip Checkout
 - Onepage
 
+## Instalação via Composer
+	$ composer require iopay-payments/magento1
+
 ## Instalação via GIT
     $ git clone https://github.com/iopay-payments/magento1 ~/iopay
     $ cp -r ~/iopay/* /dir/magento1x/
