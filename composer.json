@@ -8,5 +8,6 @@
             "email": "suporte@iopay.com.br"
         }
     ],
-    "require": {}
+    "require": {},
+    "license": "MIT"
 }
