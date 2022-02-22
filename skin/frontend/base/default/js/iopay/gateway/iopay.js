@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
         console.info('Action:', e.action);
         console.info('Text:', e.text);
         console.info('Trigger:', e.trigger);
+        jQuery('#pixEntropyKeyCopiedMessage').removeAttr('hidden');
         alert('Código de pagamento copiado com sucesso!');
         e.clearSelection();
     });

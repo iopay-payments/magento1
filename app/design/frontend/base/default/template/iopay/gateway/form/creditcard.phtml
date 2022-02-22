@@ -24,7 +24,7 @@ $urlTokenize = $api->getCompleteUrl();
     <li>
         <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Número do Cartão') ?></label>
         <div class="input-box">
-            <input type="text" pattern="\d*" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Credit Card Number')) ?>" class="input-text validate-cc-number validate-cc-type" value="" />
+            <input type="text" pattern="\d*" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Credit Card Number')) ?>" class="input-text validate-cc-number" value="" />
         </div>
     </li>
 
@@ -73,7 +73,7 @@ $urlTokenize = $api->getCompleteUrl();
         <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Código de Verificação') ?></label>
         <div class="input-box">
             <div class="v-fix">
-                <input type="text" pattern="\d*" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Código de Verificação')) ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
+                <input type="text" pattern="\d*" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Código de Verificação')) ?>" class="input-text cvv required-entry" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" />
             </div>
             <a href="#" class="cvv-what-is-this"><?php echo $this->__('O que é isso?') ?></a>
         </div>
@@ -89,6 +89,20 @@ $urlTokenize = $api->getCompleteUrl();
             </select>
         </div>
     </li>
+
+    <div class="d-flex align-content- flex-wrap ">
+        <br/>
+        <div class="p-4 ml-sm-0 ml-xl-5 ml-md-5">
+            <a href="https://iopay.com.br" target="_blank" alt="IOPAY" title="IOPAY">
+                <img src="https://static.iopay.dev/assets/img/iopay.png" width="60">
+            </a>
+        </div>
+        <div class="p-4 ml-sm-0 ml-xl-5 ml-md-5 small">
+            <br/>
+            Essa transação é processada com tecnologias de pagamento da IOPAY.<br/>
+            <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 10px;margin-bottom: -2px"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path fill="#666666" d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z"/></svg></i> Esta é uma conexão segura e os seus dados são protegidos com criptografia de ponta a ponta.
+        </div>
+    </div>
 </ul>
 
 <script type="text/javascript">

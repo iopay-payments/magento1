@@ -1,111 +1,36 @@
-.btn-iopay {
-    color: #fff;
-    background-color: #009688;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .3rem 1rem;
-    font-size: 1rem;
-    -o-transition: all .2s ease-in-out;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+/* Success Page */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #666;
+    font-size: 12px;
+    line-height: 20px;
 }
-
-.iopay-img-qr {
-    border: 0;
-    vertical-align: top;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.iopay-img-pix {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
-}
-
-.container {
-    width: 75%;
-    /*border: 1px solid red;*/
-    display: block;
+.circleSteps{
+    background-color: #989898;
+    color: #ffffff;
+    width: 28px!important;
+    height: 28px!important;
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    height: 550px;
+    border-radius: 100px;
+    margin-right: 16px;
 }
-.box {
-    margin-bottom: 0px;
-    box-sizing: border-box;
-    display: flex;
-    margin-left: 33%;
+.stats-box-height{
+    min-height: 76px;
 }
 
-.checkout-success .content-wrapper .iopay-pix .container h1 {
-    margin-left: auto;
-    margin-right: auto;
-    color: black;
-    margin-bottom: 30px;
+img {
+    display: inline !important;
 }
 
-.checkout-success .content-wrapper .iopay-pix .container .title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+.checkout-onepage-success .col-main {
+    text-align: left !important;
 }
 
-.checkout-success .content-wrapper .iopay-pix .container .subtitles {
-    font-size: 12px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}
 
-@media only screen and (max-width: 770px) {
-    .container {
-        width: 100%;
-        display: block;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        height: 550px;
-    }
-    .box {
-        margin-bottom: 0px;
-        box-sizing: border-box;
-        display: flex;
-        margin-left: 5%;
-    }
-
-    .checkout-onepage-success .iopay-pix .container h1 {
-        margin-left: auto;
-        margin-right: auto;
-        color: black;
-        margin-bottom: 30px;
-    }
-
-
-    .checkout-onepage-success .iopay-pix .container .title {
-        font-size: 14px;
-        font-weight: 600;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 40px;
-    }
-
-    .checkout-onepage-success .iopay-pix .container .subtitles {
-        font-size: 12px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-}
-
+/* Checkout */
 #credit-card-type {width:270px;}
 #credit-card-type li {
     display: inline-block;
@@ -122,3 +47,112 @@
 #credit-card-type .DI.active { background:url(../../../images/iopay/discover.jpg) no-repeat left top; width:42px; height:26px;}
 #credit-card-type .SM.active { background:url(../../../images/iopay/mestro.jpg) no-repeat left top; width:42px; height:26px;}
 #credit-card-type .SO.active { background:url(../../../images/iopay/sola.jpg) no-repeat left top; width:42px; height:26px;}
+
+.sp-methods label svg {
+    float: left;
+    margin-right: 12px;
+}
+
+.sp-methods dt {
+    background-color: rgb(255, 255, 255);
+    /* border-top-left-radius: 8px; */
+    /* border-bottom-left-radius: 8px; */
+    /* border-top-right-radius: 30px; */
+    /* border-bottom-right-radius: 8px; */
+    display: block;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.20);
+}
+.sp-methods dt label {
+    padding: 10px 45px !important;
+    width: 100% !important;
+    display: block;
+    text-align: left;
+    background-color: white !important;
+    color: #c4c4c4 !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    -webkit-transition: color 200ms ease-in;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    margin-top: 10px;
+    /*
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 8px; */
+}
+.sp-methods dt label:before {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    content: '';
+    background-image: linear-gradient(to right, #ffffff, #efefef);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    transform: translate(-50%, -50%) scale3d(1, 1, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: -1;
+}
+.sp-methods dt label:after {
+    width: 18px;
+    height: 18px;
+    content: '';
+    border: 1px solid #5b2886;
+    background-color: #FFF;
+    background-image: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+    background-repeat: no-repeat;
+    background-position: 2px 3px;
+    border-radius: 50%;
+    z-index: 2;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: pointer;
+    -webkit-transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+}
+.sp-methods dt input:checked ~ label {
+    color: #5d5d5d;
+    /*
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 8px; */
+    font-weight: normal;
+    filter: grayscale(0%);
+
+}
+.sp-methods dt input:checked ~ label:before {
+    -webkit-transform: translate(-50%, -50%) scale3d(56, 56, 1);
+    transform: translate(-50%, -50%) scale3d(56, 56, 1);
+    opacity: 1;
+
+}
+.sp-methods dt input:checked ~ label:after {
+    background-color: #6ece6b;
+    border-color: #6ece6b;
+}
+.sp-methods dt input {
+    width: 32px;
+    height: 32px;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    z-index: 2;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: pointer;
+    visibility: hidden;
+}

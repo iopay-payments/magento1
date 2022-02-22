@@ -104,7 +104,7 @@
             <iopay_gateway_creditcard>
                 <model>iopay_gateway/creditcard</model>
                 <active>1</active>
-                <title>IOPay - Cartão de Crédito</title>
+                <title>Cartão de Crédito</title>
                 <order_status>pending</order_status>
                 <payment_action>authorize_capture</payment_action>
                 <sort_order>1</sort_order>
@@ -112,7 +112,7 @@
             <iopay_gateway_pix>
                 <model>iopay_gateway/pix</model>
                 <active>1</active>
-                <title>IOPay - Pix</title>
+                <title>Pix</title>
                 <order_status>pending</order_status>
                 <instructions><![CDATA[- Para visualizar o QRCode de pagamento, conclua a compra.]]></instructions>
                 <payment_action>order</payment_action>
@@ -121,7 +121,7 @@
             <iopay_gateway_boleto>
                 <model>iopay_gateway/boleto</model>
                 <active>1</active>
-                <title>IOPay - Boleto</title>
+                <title>Boleto</title>
                 <order_status>pending</order_status>
                 <instructions><![CDATA[- Não receber após vencimento.
 - Não receber pagamento em cheque.

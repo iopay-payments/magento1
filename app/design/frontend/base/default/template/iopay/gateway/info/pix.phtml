@@ -3,11 +3,12 @@ $helper             = Mage::helper('iopay_gateway');
 $expiration_date    = $helper->convertDateHour($this->getInfo()->getIopayExpirationDate());
 ?>
 
+<p><img src="https://static.iopay.dev/assets/img/iopay.png" width="60"></p>
 <p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
 
 <?php if ($this->getInfo()->getIopayPaymentId()) : ?>
     <p>
-        <?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?>
+        <?php //echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?>
     </p>
 <?php endif; ?>
 
@@ -17,12 +18,13 @@ $expiration_date    = $helper->convertDateHour($this->getInfo()->getIopayExpirat
     </p>
 <?php endif; ?>
 
-<?php if ($this->getInfo()->getIopayPixQrcode()) : ?>
-    <p><?php echo $this->__('Copia e Cola: %s', $this->getInfo()->getIopayPixQrcode()); ?></p>
-<?php endif; ?>
-
+<p><img src="https://static.iopay.dev/ecommerce_plugins/opencart/iopay1.5.5/img/logo-pix.png" height="50"/></p>
 <?php if ($this->getInfo()->getIopayPixQrcodeUrl()) : ?>
     <p>
         <img id='qrcode' class="iopay-img-qr" src="<?php echo $this->getInfo()->getIopayPixQrcodeUrl(); ?>" title="IoPay Pix" width="200" height="200" />
     </p>
+<?php endif; ?>
+
+<?php if ($this->getInfo()->getIopayPixQrcode()) : ?>
+    <p><?php echo $this->__('Copia e Cola: %s', $this->getInfo()->getIopayPixQrcode()); ?></p>
 <?php endif; ?>

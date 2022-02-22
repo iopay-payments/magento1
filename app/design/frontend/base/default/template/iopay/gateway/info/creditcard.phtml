@@ -2,6 +2,7 @@
 $helper = Mage::helper('iopay_gateway');
 ?>
 
+<p><img src="https://static.iopay.dev/assets/img/iopay.png" width="60"></p>
 <p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
 
 <?php if ($this->getInfo()->getIopayPaymentId()) : ?>
@@ -18,6 +19,13 @@ $helper = Mage::helper('iopay_gateway');
             echo $this->__('Cartão: %s', $cardFormatted);
         ?>
     </p>
+<p>
+    <?php
+    $brand          = $helper->getCardBrand(trim(str_replace(' ', '', $creditCard)));
+    $brandImage     = $helper->getBrandImage($brand);
+    echo '<img src="'.$brandImage.'" height="50"/>';
+    ?>
+</p>
 <?php endif; ?>
 
 

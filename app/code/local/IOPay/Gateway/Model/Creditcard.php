@@ -167,10 +167,11 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
                 Mage::throwException('Cartão não criptografado, verifique os dados informados e tente novamente...');
             }
 
-            $installments = (int) $payment->getAdditionalInformation('cc_installment');
+            $installments               = (int) $payment->getAdditionalInformation('cc_installment');
+            $orderTotalWithInstallments = $this->helper()->getOrderTotalWithInstallments($installments);
 
             $ccArray = array(
-                "amount"        => round($order->getGrandTotal(), 2) * 100,
+                "amount"        => round($orderTotalWithInstallments, 2) * 100,
                 "currency"      => "BRL",
                 "description"   => Mage::helper('iopay_gateway')->__("Pedido # %s na loja %s", $order->getIncrementId(), Mage::app()->getStore()->getName()),
                 "token"         => $cardToken,
@@ -184,6 +185,8 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
                 "reference_id"  => (string)$order->getIncrementId(),
                 "products"      => $this->helper()->getShoppingCart($order)
             );
+
+            $this->log($ccArray);
 
             /* Check antifraud options */
             $antifraud_plan = Mage::helper('iopay_gateway')->getAntifraudPlan();
@@ -269,7 +272,7 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
                         ->setIopayPaymentType($payment_type)
                         ->save();
 
-                    $payment->setAdditionalInformation(json_encode($response));
+                    $payment->setAdditionalInformation('iopay_response',json_encode($response));
                     $payment->setCcStatusDescription("IoPay ID: {$response['success']['id']}");
                     $payment->setCcStatus($response['success']['status']);
                     $payment->setTransactionAdditionalInfo(Mage_Sales_Model_Order_Payment_Transaction::RAW_DETAILS, json_encode($response['success']));
@@ -286,6 +289,7 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
                 }
             } else {
                 if (isset($response['error'])) {
+                    $this->log($response);
                     $err = null;
                     foreach ($response['error'] as $group => $errors) {
                         foreach ($errors as $k => $v) {
@@ -295,6 +299,10 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
 
                     if (isset($response['error']['message_display'])) {
                         $err = $response['error']['message_display'];
+                    }
+
+                    if (isset($response['error']['message'])) {
+                        $err = $response['error']['message'];
                     }
 
                     Mage::throwException($err);

@@ -2,8 +2,9 @@
 $helper             = Mage::helper('iopay_gateway');
 $expiration_date    = $helper->convertDate($this->getInfo()->getIopayExpirationDate());
 ?>
-
+<p><img src="https://static.iopay.dev/assets/img/iopay.png" width="60"></p>
 <p><?php echo $this->escapeHtml($this->__($this->getMethod()->getTitle())) ?></p>
+<p><img src="https://static.iopay.dev/ecommerce_plugins/opencart/iopay1.5.5/img/boleto.png" height="50"/></p>
 <p><?php echo $this->__('Payment Id (IoPay): %s', $this->getInfo()->getIopayPaymentId()); ?></p>
 <p><?php echo $this->__('Customer (IoPay): %s', $this->getInfo()->getIopayCustomer()); ?></p>
 <p><?php echo $this->__('Barcode: %s', $this->getInfo()->getIopayBoletoBarcode()); ?></p>
