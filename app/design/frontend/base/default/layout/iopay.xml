@@ -24,6 +24,7 @@
             </block>
         </reference>
     </checkout_onepage_index>
+    
     <onestepcheckout_index_index>
         <reference name="head">
             <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
@@ -37,6 +38,34 @@
             </block>
         </reference>
     </onestepcheckout_index_index>
+
+    <firecheckout_index_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/jquery/jquery.mask.latest.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/inputs.js</name></action>
+            <block type="core/text" name="secure.iopay">
+                <action method="setText"><text><![CDATA[<script type="text/javascript" src=""></script>]]></text></action>
+            </block>
+            <block type="core/text" name="security.iopay">
+                <action method="setText"><text><![CDATA[<script src="" view="payment"></script>]]></text></action>
+            </block>
+        </reference>
+    </firecheckout_index_index>
+
+    <idecheckoutvm_index_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/iopay/gateway/style.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/jquery/jquery.mask.latest.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/iopay/gateway/inputs.js</name></action>
+            <block type="core/text" name="secure.iopay">
+                <action method="setText"><text><![CDATA[<script type="text/javascript" src=""></script>]]></text></action>
+            </block>
+            <block type="core/text" name="security.iopay">
+                <action method="setText"><text><![CDATA[<script src="" view="payment"></script>]]></text></action>
+            </block>
+        </reference>
+    </idecheckoutvm_index_index>
 
     <!-- success -->
     <checkout_onepage_success>
