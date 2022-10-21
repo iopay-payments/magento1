@@ -84,7 +84,7 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
         }
 
         if (Mage::helper('iopay_gateway')->getTaxfield() == 'iopay' && $data->getCcCpf()) {
-            $additional['cc_cpf'] = $data->getCcCpf();
+            $additional['iopay_cpf'] = $data->getCcCpf();
         }
 
         if ($data->getToken()) {
