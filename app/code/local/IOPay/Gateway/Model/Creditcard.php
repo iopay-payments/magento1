@@ -164,7 +164,8 @@ class IOPay_Gateway_Model_Creditcard extends Mage_Payment_Model_Method_Abstract
 
             $cardToken = $payment->getCcNumberEnc();
             if (!$cardToken || $cardToken == null) {
-                Mage::throwException('Cartão não criptografado, verifique os dados informados e tente novamente...');
+                //Mage::throwException('Cartão não criptografado, verifique os dados informados e tente novamente...');
+                $this->log("Cartão não criptografado, verifique os dados informados e tente novamente...");
             }
 
             $installments               = (int) $payment->getAdditionalInformation('cc_installment');
